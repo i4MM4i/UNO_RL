@@ -35,7 +35,7 @@ def plot(rewards, losses, algorithm, rewards2=None):
         for i in range(len(rewards2) // 100):
             average_rewards.append(np.mean(rewards2[100 * i:100 * (i + 1)]))
 
-        line_graph(np.arange(0, get_episodes_array_for_averages(average_rewards)), average_rewards, "Episodes",
+        line_graph(get_episodes_array_for_averages(average_rewards), average_rewards, "Episodes",
                    "Average reward (p2)", algorithm + "(Other NFSP player)", folder)
 
 

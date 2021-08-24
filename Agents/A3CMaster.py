@@ -14,7 +14,7 @@ from Agents.A3CWorker import A3CWorker
 class A3CMaster(Player):
     def __init__(self, trained_model_path=None, opponent_model_path=None):
         self.learning_rate = 5e-4
-        self.beta = 1e-35
+        self.beta = 1e-20
         self.gamma = 0.99
         self.state_size = State.STATE_SIZE
         self.action_size = State.ACTION_SIZE

@@ -45,7 +45,7 @@ class DeepQNetworkAgent(Player):
         self.learning_rate = learning_rate  # Pred opt: 0.1
         self.learning_rate_sl = 0.005
         self.eta = eta  # Pred opt: 0.1
-        self.number_of_episodes = 10000
+        self.number_of_episodes = 1000
         self.reduce_lr = ReduceLROnPlateau(monitor='loss', factor=0.1, patience=5, min_lr=0)
         self.policy_network = self.build_model(self.learning_rate, 'linear',
                                                Huber(reduction=Reduction.SUM, delta=self.delta))

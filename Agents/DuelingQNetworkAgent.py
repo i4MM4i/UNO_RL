@@ -11,8 +11,18 @@ from tensorflow.keras.losses import Huber, Reduction
 
 
 class DuelingQNetworkAgent(DeepQNetworkAgent):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, alpha=0.034657,
+                 delta=0.20752,
+                 epsilon_decay=0.99991,
+                 eta=0.096408,
+                 gamma=0.077969,
+                 learning_rate=0.00849):
+        super().__init__(alpha,
+                         delta,
+                         epsilon_decay,
+                         eta,
+                         gamma,
+                         learning_rate)
         self.policy_network = DuelingQNetwork(self.action_size)
         self.target_network = DuelingQNetwork(self.action_size)
         self.policy_network.compile(optimizer=keras.optimizers.Adam(), loss=Huber(reduction=Reduction.SUM))
@@ -59,7 +69,9 @@ class DuelingQNetworkAgent(DeepQNetworkAgent):
         print("Saving in file: " + folder)
         if not os.path.exists(folder):
             os.makedirs(folder)
-        self.policy_network.save(f'{folder}', save_format='tf')
+        #self.policy_network.save(f'{folder}', save_format='tf')
+        self.policy_network.save_weights(f'{folder}/policy_model_{self.n_batches}.h5')
+        self.supervised_learning_network.save_weights(f'{folder}/supervised_model_{self.n_batches}.h5')
 
 
 if __name__ == '__main__':
